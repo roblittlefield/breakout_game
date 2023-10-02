@@ -7,16 +7,18 @@ import time
 
 screen = Screen()
 screen.bgcolor("black")
-screen.setup(width=1200, height=1000)
+screen.setup(width=1200, height=800)
 screen.title("Breakout")
 screen.tracer(0)
 
-paddle = Paddle((0, -260))
+paddle = Paddle((0, -360))
 ball = Ball()
 scoreboard = Scoreboard()
 
 # Make bricks
 brick1_locations = [
+    (-500, 230),
+    (-400, 230),
     (-300, 230),
     (-200, 230),
     (-100, 230),
@@ -24,6 +26,8 @@ brick1_locations = [
     (100, 230),
     (200, 230),
     (300, 230),
+    (400, 230),
+    (500, 230),
 ]
 
 brick2_locations = [(brick_loc[0]+5, brick_loc[1]-50) for brick_loc in brick1_locations]
@@ -61,19 +65,21 @@ while game_is_on:
     ball.move()
 
     # Detect collision with wall
-    if ball.xcor() > 380 or ball.xcor() < -380:
+    if ball.xcor() > 580 or ball.xcor() < -580:
         ball.bounce_x()
-    elif ball.ycor() > 280:
+    elif ball.ycor() > 380:
         ball.bounce_y()
 
-    # Detect collion with paddle
-    if ball.ycor() < -240 and ball.distance(paddle) < 40:
+    # Detect collision with paddle
+    if ball.ycor() < -340 and ball.distance(paddle) < 40:
         ball.bounce_y()
 
     # Detect paddle miss
-    if ball.ycor() < -280:
+    if ball.ycor() < -380:
         ball.reset_position()
         scoreboard.live_lost()
+        if scoreboard.lives == 0:
+            game_is_on = False
 
     # Detect collision with brick
     brick_index = -1
