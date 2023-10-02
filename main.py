@@ -17,22 +17,26 @@ scoreboard = Scoreboard()
 
 # Make bricks
 brick1_locations = [
-    (-500, 230),
-    (-400, 230),
-    (-300, 230),
-    (-200, 230),
-    (-100, 230),
-    (0, 230),
-    (100, 230),
-    (200, 230),
-    (300, 230),
-    (400, 230),
-    (500, 230),
+    (-500, 330),
+    (-400, 330),
+    (-300, 330),
+    (-200, 330),
+    (-100, 330),
+    (0, 330),
+    (100, 330),
+    (200, 330),
+    (300, 330),
+    (400, 330),
+    (500, 330),
 ]
 
-brick2_locations = [(brick_loc[0]+5, brick_loc[1]-50) for brick_loc in brick1_locations]
+brick2_locations = [(brick_loc[0]+10, brick_loc[1]-50) for brick_loc in brick1_locations]
 
-brick3_locations = [(brick_loc[0]-5, brick_loc[1]-50*2) for brick_loc in brick1_locations]
+brick3_locations = [(brick_loc[0]-10, brick_loc[1]-50*2) for brick_loc in brick1_locations]
+
+brick4_locations = [(brick_loc[0]+10, brick_loc[1]-50*3) for brick_loc in brick1_locations]
+
+brick5_locations = [(brick_loc[0]-10, brick_loc[1]-50*4) for brick_loc in brick1_locations]
 
 bricks1 = []
 for i in range(0, len(brick1_locations)):
@@ -42,17 +46,31 @@ for i in range(0, len(brick1_locations)):
     bricks1.append(brick)
 
 bricks2 = []
-for i in range(0 , len(brick2_locations)):
+for i in range(0, len(brick2_locations)):
     (x, y) = brick2_locations[i]
     position = (x, y)
     brick = Brick(position, "orange")
     bricks2.append(brick)
 
 bricks3 = []
-for i in range(0 , len(brick3_locations)):
+for i in range(0, len(brick3_locations)):
     (x, y) = brick3_locations[i]
     position = (x, y)
+    brick = Brick(position, "yellow")
+    bricks3.append(brick)
+
+bricks4 = []
+for i in range(0, len(brick4_locations)):
+    (x, y) = brick4_locations[i]
+    position = (x, y)
     brick = Brick(position, "green")
+    bricks3.append(brick)
+
+bricks5 = []
+for i in range(0, len(brick5_locations)):
+    (x, y) = brick5_locations[i]
+    position = (x, y)
+    brick = Brick(position, "blue")
     bricks3.append(brick)
 
 screen.listen()
@@ -89,15 +107,15 @@ while game_is_on:
             ball.bounce_y()
             brick.brick_break()
             if brick_index <= 6:
-                scoreboard.point(3)
+                scoreboard.point(1)
                 ball.move_speed *= 1.4
             elif brick_index <= 13:
-                scoreboard.point(2)
+                scoreboard.point(1)
                 ball.move_speed *= 1.2
             else:
                 scoreboard.point(1)
 
-            if scoreboard.score >= 42:
+            if scoreboard.score >= 55:
                 time.sleep(0.3)
                 game_is_on = False
                 scoreboard.goto(0, 0)
