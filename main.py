@@ -99,7 +99,7 @@ while game_is_on:
         if scoreboard.lives == 0:
             game_is_on = False
             scoreboard.goto(0, 0)
-            scoreboard.write(f"YOU LOSE. Try agian next time.", align="center", font=("Courier", 80, "normal"))
+            scoreboard.write(f"YOU LOSE. Try again next time.", align="center", font=("Courier", 80, "normal"))
 
     # Detect collision with brick
     brick_index = -1
