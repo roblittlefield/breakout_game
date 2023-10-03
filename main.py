@@ -98,6 +98,8 @@ while game_is_on:
         scoreboard.live_lost()
         if scoreboard.lives == 0:
             game_is_on = False
+            scoreboard.goto(0, 0)
+            scoreboard.write(f"YOU LOSE. Try agian next time.", align="center", font=("Courier", 80, "normal"))
 
     # Detect collision with brick
     brick_index = -1
@@ -106,12 +108,18 @@ while game_is_on:
         if ball.distance(brick.pos()) < 50:
             ball.bounce_y()
             brick.brick_break()
-            if brick_index <= 6:
+            if brick_index <= 10:
                 scoreboard.point(1)
                 ball.move_speed *= 1.4
-            elif brick_index <= 13:
+            elif brick_index <= 21:
+                scoreboard.point(1)
+                ball.move_speed *= 1.3
+            elif brick_index <= 32:
                 scoreboard.point(1)
                 ball.move_speed *= 1.2
+            elif brick_index <= 43:
+                scoreboard.point(1)
+                ball.move_speed *= 1.1
             else:
                 scoreboard.point(1)
 
